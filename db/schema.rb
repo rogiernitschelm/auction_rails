@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506104621) do
+ActiveRecord::Schema.define(version: 20170506180903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auctions", force: :cascade do |t|
+    t.string   "title",                                   null: false
+    t.text     "description",                             null: false
+    t.decimal  "starting_price", precision: 10, scale: 2, null: false
+    t.decimal  "buyout_price",   precision: 10, scale: 2
+    t.integer  "seller_id",                               null: false
+    t.datetime "expires_at",                              null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["seller_id"], name: "index_auctions_on_seller_id", using: :btree
+  end
+
+  create_table "bids", force: :cascade do |t|
+    t.decimal  "amount",     precision: 10, scale: 2, null: false
+    t.integer  "buyer_id",                            null: false
+    t.integer  "auction_id",                          null: false
+    t.datetime "placed_at",                           null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["auction_id"], name: "index_bids_on_auction_id", using: :btree
+    t.index ["buyer_id"], name: "index_bids_on_buyer_id", using: :btree
+  end
 
   create_table "buyers", force: :cascade do |t|
     t.integer  "user_id",    null: false

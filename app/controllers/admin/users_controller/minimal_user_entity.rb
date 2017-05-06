@@ -9,6 +9,5 @@ class Admin::UsersController::MinimalUserEntity < BaseEntity
   expose :city
   expose :first_name
   expose :last_name
-  expose :birth_date
   expose :company, using: CompanyEntity, safe: true
 end

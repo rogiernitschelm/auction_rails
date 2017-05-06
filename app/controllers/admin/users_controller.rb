@@ -23,10 +23,10 @@ class Admin::UsersController < ApplicationController
 
   def index_params
     params.permit(
-      :usertype,
+      :offset,
       :search_string,
-      { filters: [:city] },
-      :offset
+      :usertype,
+      filters: [:city]
     )
   end
 end
