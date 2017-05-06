@@ -1,6 +1,6 @@
 include Entities
 
-class Api::SellersController::SellerEntity < BaseEntity
+class Admin::SellersController::SellerEntity < BaseEntity
   class UserEntity < BaseEntity
     expose :city
     expose :email
@@ -10,8 +10,10 @@ class Api::SellersController::SellerEntity < BaseEntity
 
   class CompanyEntity < BaseEntity
     expose :name
+    expose :verified
   end
 
+  expose :verified
   expose :user, using: UserEntity
   expose :company, using: CompanyEntity
 end

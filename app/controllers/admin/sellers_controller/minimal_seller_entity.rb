@@ -1,9 +1,7 @@
 include Entities
 
-class Api::SellersController::SellerEntity < BaseEntity
+class Admin::SellersController::MinimalSellerEntity < BaseEntity
   class UserEntity < BaseEntity
-    expose :city
-    expose :email
     expose :first_name
     expose :last_name
   end

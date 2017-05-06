@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   check_authorization
 
   protected
-  # 
+  #
   # def authenticate_request!
   #   if !payload || !JsonWebToken.valid_payload(payload.first)
   #     return invalid_authentication

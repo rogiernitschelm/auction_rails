@@ -13,6 +13,24 @@ class Api::BuyersController < ApplicationController
       @buyer.save!
     end
 
-    render_entity SellerEntity, @seller
+    render_entity BuyerEntity, @buyer
+  end
+
+  def show
+    render_entity BuyerEntity, @buyer
+  end
+
+  def update
+    Buyer.transaction do
+      @buyer.user.update_attributes!(user_params)
+    end
+
+    render_entity BuyerEntity, @buyer
+  end
+
+  def destroy
+    @buyer.user.destroy!
+
+    render json: nil, status: 200
   end
 end

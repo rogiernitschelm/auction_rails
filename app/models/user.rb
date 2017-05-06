@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include SearchHelper
+
   has_secure_password
   before_save :downcase
 
@@ -21,8 +23,6 @@ class User < ApplicationRecord
     new_record? || changes[:crypted_password]
   }
 
-  public
-
   def admin?
     admin
   end
@@ -35,10 +35,16 @@ class User < ApplicationRecord
     buyer
   end
 
+  def fully_verified?
+    return seller.verified? && seller.company.verified? if seller?
+
+    buyer.company && buyer.company.verified?
+  end
+
   private
 
   def usertype
-    raise('A usertype is required') unless seller? || buyer?
+    raise('A usertype is required') unless seller? || buyer? || admin?
   end
 
   def downcase

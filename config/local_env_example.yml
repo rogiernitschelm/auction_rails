@@ -1,0 +1,5 @@
+test:
+  auction_url: 'http://localhost:3000'
+
+development:
+  auction_url: 'http://localhost:3000'

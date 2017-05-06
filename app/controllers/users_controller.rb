@@ -14,8 +14,4 @@ class UsersController < ApplicationController
       render json: { error: :invalid_username_or_password }, status: 403
     end
   end
-
-  def update
-    @user.update_attributes!(user_params)
-  end
 end

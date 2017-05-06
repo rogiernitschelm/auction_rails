@@ -19,12 +19,6 @@ RSpec.describe User do
     expect { @user.destroy! }.to change { Seller.count }.by(-1)
   end
 
-  it 'destroys both the user and the buyer' do
-    create_user('buyer')
-
-    expect { @user.destroy! }.to change { Buyer.count }.by(-1)
-  end
-
   private
 
   def create_user(usertype = 'seller')

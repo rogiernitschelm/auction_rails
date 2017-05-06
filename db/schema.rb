@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505170216) do
+ActiveRecord::Schema.define(version: 20170506104621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,32 @@ ActiveRecord::Schema.define(version: 20170505170216) do
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
+    t.index ["company_id"], name: "index_buyers_on_company_id", using: :btree
     t.index ["user_id"], name: "index_buyers_on_user_id", using: :btree
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",                                            null: false
+    t.string   "country",             default: "The Netherlands", null: false
+    t.string   "telephone",                                       null: false
+    t.string   "email",                                           null: false
+    t.string   "city",                                            null: false
+    t.string   "address",                                         null: false
+    t.string   "business",                                        null: false
+    t.string   "chamber_of_commerce",                             null: false
+    t.boolean  "verified",            default: false,             null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
   create_table "sellers", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",                    null: false
+    t.boolean  "verified",   default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "company_id"
+    t.index ["company_id"], name: "index_sellers_on_company_id", using: :btree
     t.index ["user_id"], name: "index_sellers_on_user_id", using: :btree
   end
 

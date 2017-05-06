@@ -18,6 +18,9 @@ Bundler.require(*Rails.groups)
 
 module RailsAuctions
   class Application < Rails::Application
+    config_for(:local_env).each do |key, value|
+      config.send("#{key}=", value.is_a?(Hash) ? Hashie::Mash.new(value) : value)
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

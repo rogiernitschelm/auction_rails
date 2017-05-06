@@ -16,18 +16,21 @@ class Api::SellersController < ApplicationController
     render_entity SellerEntity, @seller
   end
 
+  def show
+    render_entity SellerEntity, @seller
+  end
+
   def update
     Seller.transaction do
-      @seller.update_attributes!(seller_params)
       @seller.user.update_attributes!(user_params)
     end
 
     render_entity SellerEntity, @seller
   end
 
-  private
+  def destroy
+    @seller.user.destroy!
 
-  def seller_params
+    render json: nil, status: 200
   end
-
 end
