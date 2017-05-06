@@ -4,10 +4,11 @@ class Admin::UsersController < ApplicationController
   PAGE_SIZE = 50
 
   def index
-    @users = @users.search(params[:search_string]) if params[:search_string]
+    @users = @users.usertype(index_params[:usertype]) if index_params[:usertype]
     @users = @users
+      .search(index_params[:search_string], index_params[:filters])
       .limit(PAGE_SIZE)
-      .offset(params[:offset] || 0)
+      .offset(index_params[:offset] || 0)
 
     render_entity MinimalUserEntity, @users
   end
@@ -16,5 +17,16 @@ class Admin::UsersController < ApplicationController
     @user.destroy!
 
     render json: nil, status: 200
+  end
+
+  private
+
+  def index_params
+    params.permit(
+      :usertype,
+      :search_string,
+      { filters: [:city] },
+      :offset
+    )
   end
 end

@@ -7,20 +7,19 @@ class User < ApplicationRecord
   has_one :seller, dependent: :destroy
   has_one :buyer, dependent: :destroy
 
-  validates_length_of :first_name, minimum: 2, maximum: 30, allow_blank: false
-  validates_length_of :last_name, minimum: 2, maximum: 30, allow_blank: false
-  validates_length_of :city, minumum: 2, maximum: 30
-  validates_length_of :password, minimum: 8, allow_blank: false, if: :password
+  validates :first_name, length: { minimum: 2, maximum: 30 }, allow_blank: false
+  validates :last_name, length: { minimum: 2, maximum: 30 }, allow_blank: false
+  validates :city, length: { minumum: 2, maximum: 30 }
+  validates :password, length: { minimum: 8 }, allow_blank: false, if: :password
 
   validate :usertype
-
-  validates :email, uniqueness: { case_sensitive: false }
   validates :email, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   }
 
-  validates :password, confirmation: true, if: lambda {
-    new_record? || changes[:crypted_password]
+  scope :usertype, ->(usertype) { joins(usertype) }
+  scope :combined_search, ->(search_string = '', search_filters = {}) {
+    search(search_string, search_filters)
   }
 
   def admin?
