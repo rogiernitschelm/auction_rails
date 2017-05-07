@@ -15,7 +15,9 @@ gem 'rails', '~> 5.0.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'faker'
   gem 'rspec-rails', '~> 3.5'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :development do

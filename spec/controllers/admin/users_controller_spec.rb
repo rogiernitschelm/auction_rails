@@ -9,20 +9,13 @@ RSpec.describe Admin::UsersController do
   include ControllerHelper
 
   before do
-    admin = User.new(
-      email: 'mail@hoogle.nom',
-      password: 'abcd1234',
-      first_name: 'Hermien',
-      last_name: 'Aap',
-      admin: true
-    )
+    @admin = FactoryGirl.create(:user, admin: true)
 
-    admin.save!
-    set_authorization_header(admin.id)
+    set_authorization_header(@admin.id)
   end
 
   it 'exposes a limited list of users' do
-    create_users(51)
+    FactoryGirl.create_list(:seller, 51)
 
     get :index
     expect(parsed(response).count).to be(50)
@@ -32,50 +25,33 @@ RSpec.describe Admin::UsersController do
   end
 
   it 'destroys a user' do
-    create_users
+    @user = FactoryGirl.create(:user)
 
-    delete :destroy, params: { id: User.last.id }
+    delete :destroy, params: { id: @user.id }
     expect(response.status).to be(200)
   end
 
   it 'finds the user when providing a search string' do
-    get :index, params: { search_string: 'mail@hoogle.nom' }
-    expect(parsed(response).first['first_name']).to eq('Hermien')
+    @user = FactoryGirl.create(:user)
+
+    get :index, params: { search_string: @user.email }
+    expect(parsed(response).first['first_name']).to eq(@user.first_name)
   end
 
   it 'does not find the user when providing a gibberish search string' do
-    create_users
+    FactoryGirl.create_list(:user, 3)
 
-    get :index, params: { search_string: 'bla@hoogle.nom' }
+    get :index, params: { search_string: 'zf8q23sfl' }
     expect(parsed(response).empty?).to be(true)
   end
 
   it 'filters the users' do
-    create_users(4)
+    FactoryGirl.create(:user, city: 'Amsterdam')
+    FactoryGirl.create(:user, city: 'Culemborg')
 
-    get :index, params: { filters: { city: 'Rotterdam' } }
+    get :index, params: { filters: { city: 'Amsterdam' } }
 
-    expect(parsed(response).select { |user| user['city'] == 'Amsterdam' }).to eq([])
-    expect(parsed(response).select { |user| user['city'] == 'Rotterdam' }.count).to eq(2)
-  end
-
-  private
-
-  def create_users(count = 3)
-    count.times do |index|
-      seller = Seller.new
-
-      user = User.new(
-        email: "#{index}test@hoogle.nom",
-        password: 'abcd1234',
-        first_name: "Sjaak de #{index}e ",
-        last_name: 'Klaassen',
-        birth_date: "#{rand(1900..2017)}-#{rand(12)}-#{rand(28)}",
-        city: index.even? ? 'Amsterdam' : 'Rotterdam'
-      )
-
-      user.seller = seller
-      user.save!
-    end
+    expect(parsed(response).count).to eq(1)
+    expect(parsed(response).select { |user| user['city'] == 'Amsterdam' }.count).to eq(1)
   end
 end

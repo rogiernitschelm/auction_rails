@@ -9,30 +9,14 @@ RSpec.describe Admin::SellersController do
   include ControllerHelper
 
   before do
-    admin = User.create!(
-      email: 'admin@hoogle.nom',
-      password: 'abcd1234',
-      first_name: 'Hermien',
-      last_name: 'Aap',
-      admin: true
-    )
+    @admin = FactoryGirl.create(:user, admin: true)
+    @seller = FactoryGirl.create(:seller)
 
-    seller = Seller.new
-    user = User.new(
-      email: 'mail@hoogle.nom',
-      password: 'abcd1234',
-      first_name: 'Sjaak',
-      last_name: 'Klaassen'
-    )
-
-    user.seller = seller
-    user.save!
-
-    set_authorization_header(admin.id)
+    set_authorization_header(@admin.id)
   end
 
   it 'destroys a seller' do
-    delete :destroy, params: { id: Seller.first.id }
+    delete :destroy, params: { id: @seller.id }
     expect(Seller.count).to be(0)
   end
 
@@ -40,18 +24,18 @@ RSpec.describe Admin::SellersController do
     put :update,
 
       params: {
-        id: Seller.first.id,
+        id: @seller.id,
         email: 'mail@noogle.gom',
         verified: true
       }
 
     expect(parsed(response)['user']['email']).to eq('mail@noogle.gom')
-    expect(Seller.first.verified).to be(true)
+    expect(@seller.verified?).to be(true)
   end
 
   it 'shows a seller' do
-    get :show, params: { id: Seller.first.id }
+    get :show, params: { id: @seller.id }
 
-    expect(parsed(response)['user']['email']).to eq('mail@hoogle.nom')
+    expect(parsed(response)['user']['email']).to eq(@seller.user.email)
   end
 end

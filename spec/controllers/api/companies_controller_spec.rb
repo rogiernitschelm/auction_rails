@@ -5,21 +5,10 @@ require_relative '../../helpers/authorization_helper'
 RSpec.describe Api::CompaniesController do
   include AuthorizationHelper
 
-  before do |test|
-    unless test.metadata[:skip_before]
-      seller = Seller.new
-      @user = User.new(
-        email: 'mail@hoogle.nom',
-        password: 'abcd1234',
-        first_name: 'Hermien',
-        last_name: 'Aap'
-      )
+  before do
+    @seller = FactoryGirl.create(:seller, verified: false, company: nil)
 
-      @user.seller = seller
-      @user.save!
-
-      set_authorization_header(@user.id)
-    end
+    set_authorization_header(@seller.user.id)
   end
 
   it 'creates a company' do

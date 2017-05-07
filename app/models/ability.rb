@@ -23,20 +23,18 @@ class Ability
     can %i(update destroy show), Buyer, id: @user.buyer.id
     can :update, User, id: @user.id
     can :create, Company if @user.buyer.company.nil?
-
     return unless @user.fully_verified?
 
-    # TODO: Add auction stuff
+    can :create, Bid
   end
 
   def seller_abilities
     can %i(update destroy show), Seller, id: @user.seller.id
     can :update, User, id: @user.id
     can :create, Company if @user.seller.company.nil?
-
     return unless @user.fully_verified?
 
-    # TODO: Add auction stuff
+    can :create, Auction
   end
 
   def admin_abilities

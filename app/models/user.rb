@@ -12,7 +12,6 @@ class User < ApplicationRecord
   validates :city, length: { minumum: 2, maximum: 30 }
   validates :password, length: { minimum: 8 }, allow_blank: false, if: :password
 
-  validate :usertype
   validates :email, uniqueness: { case_sensitive: false }, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   }
@@ -41,10 +40,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def usertype
-    errors.add(:usertype, 'required.') unless seller? || buyer? || admin?
-  end
 
   def downcase
     email.downcase!

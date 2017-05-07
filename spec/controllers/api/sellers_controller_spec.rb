@@ -7,18 +7,9 @@ RSpec.describe Api::SellersController do
 
   before do |test|
     unless test.metadata[:skip_before]
-      seller = Seller.new
-      @user = User.new(
-        email: 'mail@hoogle.nom',
-        password: 'abcd1234',
-        first_name: 'Hermien',
-        last_name: 'Aap'
-      )
+      @seller = FactoryGirl.create(:seller)
 
-      @user.seller = seller
-      @user.save!
-
-      set_authorization_header(@user.id)
+      set_authorization_header(@seller.user.id)
     end
   end
 
@@ -39,27 +30,27 @@ RSpec.describe Api::SellersController do
   end
 
   it 'updates a seller and a user' do
-    put :update, params: { id: @user.seller.id, email: 'mail@foogle.bom' }
+    put :update, params: { id: @seller.id, email: 'mail@foogle.bom' }
 
-    @user.reload
+    @seller.reload
 
-    expect(@user['email']).to eq('mail@foogle.bom')
-    expect(@user['password']).to be(nil)
+    expect(@seller.user['email']).to eq('mail@foogle.bom')
+    expect(@seller.user['password']).to be(nil)
   end
 
   it 'destroys a seller and a user' do
     expect do
-      delete :destroy, params: { id: @user.seller.id }
+      delete :destroy, params: { id: @seller.id }
     end.to change { User.count && Seller.count }.by(-1)
 
     expect(response.status).to eq(200)
   end
 
   it 'shows a seller entity' do
-    get :show, params: { id: @user.seller.id }
+    get :show, params: { id: @seller.id }
 
     user = JSON.parse(response.body)['user']
 
-    expect(user['email']).to eq('mail@hoogle.nom')
+    expect(user['email']).to eq(@seller.user.email)
   end
 end

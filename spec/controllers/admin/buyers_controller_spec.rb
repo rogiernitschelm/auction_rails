@@ -9,30 +9,13 @@ RSpec.describe Admin::BuyersController do
   include ControllerHelper
 
   before do
-    admin = User.create!(
-      email: 'admin@hoogle.nom',
-      password: 'abcd1234',
-      first_name: 'Hermien',
-      last_name: 'Aap',
-      admin: true
-    )
-
-    buyer = Buyer.new
-    user = User.new(
-      email: 'mail@hoogle.nom',
-      password: 'abcd1234',
-      first_name: 'Sjaak',
-      last_name: 'Klaassen'
-    )
-
-    user.buyer = buyer
-    user.save!
-
-    set_authorization_header(admin.id)
+    @admin = FactoryGirl.create(:user, admin: true)
+    @buyer = FactoryGirl.create(:buyer)
+    set_authorization_header(@admin.id)
   end
 
   it 'destroys a buyer' do
-    delete :destroy, params: { id: Buyer.first.id }
+    delete :destroy, params: { id: @buyer.id }
     expect(Buyer.count).to be(0)
   end
 
@@ -40,15 +23,15 @@ RSpec.describe Admin::BuyersController do
     put :update,
 
       params: {
-        id: Buyer.first.id,
-        email: 'mail@noogle.gom'
+        id: @buyer.id,
+        email: 'fail@moogle.lom'
       }
 
-    expect(parsed(response)['user']['email']).to eq('mail@noogle.gom')
+    expect(parsed(response)['user']['email']).to eq('fail@moogle.lom')
   end
 
   it 'shows a buyer' do
-    get :show, params: { id: Buyer.first.id }
-    expect(parsed(response)['user']['email']).to eq('mail@hoogle.nom')
+    get :show, params: { id: @buyer.id }
+    expect(parsed(response)['user']['email']).to eq(@buyer.user.email)
   end
 end

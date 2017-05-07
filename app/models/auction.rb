@@ -11,6 +11,12 @@ class Auction < ApplicationRecord
 
   private
 
+  def highest_bid?
+    return starting_price if auction.bids.empty?
+
+    auction.bids.order('amount DESC').first.amount
+  end
+
   def seller_is_verified?
     errors.add(:seller, 'is not verified') unless seller.verified?
   end
