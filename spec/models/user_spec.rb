@@ -1,6 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe User do
+RSpec.describe User, type: :model do
+  it 'returns all users of a type' do
+    FactoryGirl.create_list(:seller, 3)
+    FactoryGirl.create_list(:buyer, 3)
+
+    expect(User.usertype(:seller).count).to be(3)
+    expect(User.usertype(:buyer).count).to be(3)
+  end
+
   it 'creates a new user with a seller' do
     create_user
 

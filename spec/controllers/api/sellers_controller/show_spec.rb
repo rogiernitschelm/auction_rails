@@ -5,15 +5,11 @@ RSpec.describe Api::SellersController do
   include AuthorizationHelpers
   include ControllerHelpers
 
-  before do
-    @seller = FactoryGirl.create(:seller)
-
-    set_authorization_header(@seller.user.id)
-  end
-
   it 'shows a seller entity' do
-    get :show, params: { id: @seller.id }
+    seller = FactoryGirl.create(:seller)
+    set_authorization_header(seller.user.id)
 
-    expect(body['user']['email']).to eq(@seller.user.email)
+    get :show, params: { id: seller.id }
+    expect(body['user']['email']).to eq(seller.user.email)
   end
 end

@@ -4,15 +4,11 @@ require 'json_web_token'
 RSpec.describe Api::CompaniesController do
   include AuthorizationHelpers
 
-  before do
-    @seller = FactoryGirl.create(:seller, verified: false, company: nil)
-
-    set_authorization_header(@seller.user.id)
-  end
-
   it 'creates a company' do
-    post :create, params: company_params
+    seller = FactoryGirl.create(:seller, verified: false, company: nil)
+    set_authorization_header(seller.user.id)
 
+    post :create, params: company_params
     expect(response.status).to eq(200)
   end
 
