@@ -4,6 +4,10 @@ class Bid < ApplicationRecord
 
   validate :higher_bid?
 
+  scope :leading, -> {
+    joins(:auction).where('bids.amount = (SELECT MAX(bids.amount) FROM bids)')
+  }
+
   private
 
   def surpasses_buyout_amount?
