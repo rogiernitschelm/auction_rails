@@ -1,5 +1,8 @@
 class Auction < ApplicationRecord
-  has_many :bids
+  before_destroy :no_bids_present?
+  before_update :no_bids_present?
+
+  has_many :bids, dependent: :destroy
   belongs_to :seller
 
   validates :title, length: { minimum: 20 }, allow_blank: false
@@ -25,5 +28,9 @@ class Auction < ApplicationRecord
     if !expires_at || expires_at < Time.zone.now
       errors.add(:expires_at, 'cannot be in the past or empty')
     end
+  end
+
+  def no_bids_present?
+    throw :abort unless bids.empty?
   end
 end

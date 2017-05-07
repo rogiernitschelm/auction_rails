@@ -5,7 +5,7 @@ FactoryGirl.define do
   sequence :user
   sequence :chamber_of_commerce { Array.new(8) { rand(10) }.join }
   sequence :expires_at do
-    random = rand(10)
+    random = rand(10) + 1
 
     Faker::Date.forward(random)
   end
