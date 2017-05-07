@@ -2,14 +2,14 @@ class Admin::CompaniesController < ApplicationController
   load_and_authorize_resource
 
   def update
-    @company = Company.update_attributes!(company_params)
+    @company = Company.update_attributes!(update_params)
 
     render_entity CompanyEntity, @company
   end
 
   private
 
-  def company_params
+  def update_params
     params.permit(
       :name,
       :country,

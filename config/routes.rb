@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :buyers, only: %i(show create update destroy)
     resources :companies, only: %i(create)
     resources :sellers, only: %i(show create update destroy)
+    resources :auctions, only: %i(index show create update destroy)
   end
 
   namespace :admin do
@@ -11,5 +12,5 @@ Rails.application.routes.draw do
     resources :buyers, only: %i(show update destroy)
   end
 
-  post 'users/login'
+  post 'authorizations/login'
 end

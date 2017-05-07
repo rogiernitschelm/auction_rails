@@ -1,7 +1,7 @@
-class UsersController < ApplicationController
+class AuthorizationsController < ApplicationController
   include UserParams
 
-  load_and_authorize_resource
+  skip_authorization_check only: :login
 
   def login
     user = User.find_by(email: params[:email].to_s.downcase)

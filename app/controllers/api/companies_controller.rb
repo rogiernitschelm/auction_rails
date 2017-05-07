@@ -2,14 +2,14 @@ class Api::CompaniesController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @company = Company.create(company_params)
+    @company = Company.create(create_params)
 
     render_entity CompanyEntity, @company
   end
 
   private
 
-  def company_params
+  def create_params
     params.permit(
       :name,
       :country,

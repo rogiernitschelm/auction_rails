@@ -17,9 +17,6 @@ class User < ApplicationRecord
   }
 
   scope :usertype, ->(usertype) { joins(usertype) }
-  scope :combined_search, ->(search_string = '', search_filters = {}) {
-    search(search_string, search_filters)
-  }
 
   def admin?
     admin

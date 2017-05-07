@@ -1,6 +1,6 @@
 require 'json_web_token'
 
-module AuthorizationHelper
+module AuthorizationHelpers
   def set_authorization_header(user_id)
     @request.headers['Authorization'] = JWT.encode(
       { user_id: user_id },

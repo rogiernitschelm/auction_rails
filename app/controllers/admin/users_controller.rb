@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   def index
     @users = @users.usertype(index_params[:usertype]) if index_params[:usertype]
     @users = @users
-      .search(index_params[:search_string], index_params[:filters])
+      .search(index_params[:search_string])
       .limit(PAGE_SIZE)
       .offset(index_params[:offset] || 0)
 
@@ -25,8 +25,7 @@ class Admin::UsersController < ApplicationController
     params.permit(
       :offset,
       :search_string,
-      :usertype,
-      filters: [:city]
+      :usertype
     )
   end
 end

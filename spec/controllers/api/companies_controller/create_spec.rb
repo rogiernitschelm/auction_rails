@@ -1,9 +1,8 @@
 require 'rails_helper'
 require 'json_web_token'
-require_relative '../../helpers/authorization_helper'
 
 RSpec.describe Api::CompaniesController do
-  include AuthorizationHelper
+  include AuthorizationHelpers
 
   before do
     @seller = FactoryGirl.create(:seller, verified: false, company: nil)

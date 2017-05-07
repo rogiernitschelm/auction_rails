@@ -26,12 +26,7 @@ class ApplicationController < ActionController::API
   def payload
     auth_header = request.headers['Authorization']
 
-    unless auth_header
-      raise ActionController::BadRequest.new(
-        'Authorization header missing',
-        403
-      )
-    end
+    raise ActionController::InvalidAuthenticityToken unless auth_header
 
     token = auth_header.split(' ').last
 
