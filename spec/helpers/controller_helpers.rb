@@ -16,4 +16,10 @@ module ControllerHelpers
 
     @auctions = FactoryGirl.create_list(:auction, 3) if with_auctions
   end
+
+  def create_admin(with_auctions = true)
+    @admin = FactoryGirl.create(:user, admin: true)
+
+    @auctions = FactoryGirl.create_list(:auction, 3) if with_auctions
+  end
 end

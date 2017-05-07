@@ -7,9 +7,11 @@ RSpec.describe Auction, type: :model do
   end
 
   it 'returns all active auctions' do
-    FactoryGirl.create(:bid, amount: 10)
-    FactoryGirl.create(:bid, amount: 100)
-    FactoryGirl.create(:bid, amount: 1000)
+    auction = FactoryGirl.create(:auction, buyout_price: 999_999)
+
+    FactoryGirl.create(:bid, amount: 10, auction: auction)
+    FactoryGirl.create(:bid, amount: 100, auction: auction)
+    FactoryGirl.create(:bid, amount: 1000, auction: auction)
 
     expect(Auction.active.count).to be(3)
     expect(Auction.current_price(1, 11).count).to be(1)

@@ -3,7 +3,6 @@ class Bid < ApplicationRecord
   belongs_to :buyer
 
   validate :higher_bid?
-  validate :has_active_state
 
   private
 

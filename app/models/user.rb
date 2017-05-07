@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_secure_password
   before_save :downcase
 
-  has_one :seller, dependent: :destroy
   has_one :buyer, dependent: :destroy
+  has_one :seller, dependent: :destroy
 
   validates :first_name, length: { minimum: 2, maximum: 30 }, allow_blank: false
   validates :last_name, length: { minimum: 2, maximum: 30 }, allow_blank: false

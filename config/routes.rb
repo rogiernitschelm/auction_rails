@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :users, only: %i(index destroy)
     resources :sellers, only: %i(show update destroy)
     resources :buyers, only: %i(show update destroy)
+    resources :auctions, only: %i(index show update destroy)
   end
 
   post 'authorizations/login'

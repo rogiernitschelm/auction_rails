@@ -14,15 +14,13 @@ class Auction < ApplicationRecord
 
   validate :not_in_the_past, :seller_is_verified?
 
-  scope :active, -> { where('expires_at > ?', Time.zone.now) }
+  scope :active, -> { joins(:bids).where('bids.amount < auctions.buyout_price AND expires_at > ?', Time.zone.now) }
   scope :current_price, ->(minimum = 0, maximum = 9_999_999) {
     joins(:bids).where('bids.amount > ? AND bids.amount < ?', minimum, maximum)
   }
 
-  def is_active?
-    return true unless expires_at < Time.zone.now || highest_bid > buyout_price
-
-    false
+  def active?
+    expires_at > Time.zone.now && highest_bid < buyout_price
   end
 
   private
