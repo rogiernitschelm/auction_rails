@@ -19,6 +19,12 @@ class Auction < ApplicationRecord
     joins(:bids).where('bids.amount > ? AND bids.amount < ?', minimum, maximum)
   }
 
+  def is_active?
+    return true unless expires_at < Time.zone.now || highest_bid > buyout_price
+
+    false
+  end
+
   private
 
   def seller_is_verified?

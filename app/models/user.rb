@@ -11,7 +11,6 @@ class User < ApplicationRecord
   validates :last_name, length: { minimum: 2, maximum: 30 }, allow_blank: false
   validates :city, length: { minumum: 2, maximum: 30 }
   validates :password, length: { minimum: 8 }, allow_blank: false, if: :password
-
   validates :email, uniqueness: { case_sensitive: false }, format: {
     with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
   }
