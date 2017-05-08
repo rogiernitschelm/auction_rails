@@ -8,6 +8,10 @@ class Api::BidsController < ApplicationController
   end
 
   def create
+    unless @bid.auction.active? && @bid.higher_bid?
+      return render json: nil, status: 422
+    end
+
     @bid.placed_at = Time.zone.now
     @bid.save!
 
