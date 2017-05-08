@@ -23,6 +23,15 @@ class ApplicationController < ActionController::API
 
   private
 
+  # Helper to see if the user is registered. This for occasions that
+  # authorization headers could be present, but should not raise when they are.
+
+  def authorization_header?
+    return true if request.headers['Authorization']
+
+    false
+  end
+
   def payload
     auth_header = request.headers['Authorization']
 

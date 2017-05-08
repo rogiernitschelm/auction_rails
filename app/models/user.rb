@@ -22,11 +22,15 @@ class User < ApplicationRecord
   end
 
   def seller?
-    seller
+    return true if seller
+
+    false
   end
 
   def buyer?
-    buyer
+    return true if buyer
+
+    false
   end
 
   def fully_verified?

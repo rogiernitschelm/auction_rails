@@ -7,7 +7,7 @@ RSpec.describe Admin::AuctionsController do
 
   describe 'GET index' do
     before do
-      create_admin
+      create_admin_with_auctions
       set_authorization_header(@admin.id)
     end
 
@@ -39,6 +39,42 @@ RSpec.describe Admin::AuctionsController do
       get :index
 
       expect(body.count).to be(50)
+    end
+  end
+
+  describe 'GET show' do
+    it 'shows an auction' do
+      create_admin_with_auctions
+      set_authorization_header(@admin.id)
+
+      get :show, params: { id: @auctions.first.id }
+
+      expect(body['title']).to eq(@auctions.first.title)
+    end
+  end
+
+  describe 'PUT update' do
+    it 'updates an auction' do
+      create_admin_with_auctions
+      set_authorization_header(@admin.id)
+
+      put :update, params: {
+        id: @auctions.first.id,
+        title: 'Een nieuwe titel voor deze veiling!'
+      }
+
+      expect(body['title']).to eq('Een nieuwe titel voor deze veiling!')
+    end
+  end
+
+  describe 'DELETE destroy' do
+    it 'destroys an auction' do
+      create_admin_with_auctions
+      set_authorization_header(@admin.id)
+
+      expect do
+        delete :destroy, params: { id: @auctions.first.id }
+      end.to change { Auction.count }.by(-1)
     end
   end
 end

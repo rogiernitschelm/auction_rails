@@ -20,6 +20,8 @@ class Ability
   end
 
   def buyer_abilities
+    cannot :create, Buyer
+
     can %i(update destroy show), Buyer, id: @user.buyer.id
     can :update, User, id: @user.id
     can :create, Company if @user.buyer.company.nil?
@@ -30,6 +32,8 @@ class Ability
   end
 
   def seller_abilities
+    cannot :create, Seller
+
     can %i(update destroy show), Seller, id: @user.seller.id
     can :update, User, id: @user.id
     can :create, Company if @user.seller.company.nil?

@@ -8,7 +8,7 @@ RSpec.describe Api::AuctionsController do
   describe 'GET index' do
     context 'when logged in as a seller' do
       before do
-        create_seller
+        create_seller_with_auctions
 
         set_authorization_header(@seller.user.id)
       end
@@ -54,7 +54,7 @@ RSpec.describe Api::AuctionsController do
 
     context 'logged in as a buyer' do
       before do
-        create_buyer
+        create_buyer_with_auctions
 
         set_authorization_header(@buyer.user.id)
       end

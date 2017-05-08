@@ -11,7 +11,7 @@ module SearchHelper
       columns_hash = model.columns_hash
 
       columns_hash.select do |key, value|
-        if value.type == :string
+        if value.type == :string || value.type == :text
           search_fields += "#{key} ILIKE :query"
           search_fields += ' OR '
         end

@@ -5,6 +5,8 @@ class Api::SellersController < ApplicationController
   skip_authorization_check only: :create
 
   def create
+    return render json: nil, status: 403 if authorization_header?
+
     Seller.transaction do
       user = User.new(user_params)
 

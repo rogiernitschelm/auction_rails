@@ -26,7 +26,7 @@ class Auction < ApplicationRecord
   private
 
   def seller_is_verified?
-    errors.add(:seller, 'is not verified') unless seller.verified?
+    errors.add(:seller, 'is not verified') unless seller.verified
   end
 
   def not_in_the_past?

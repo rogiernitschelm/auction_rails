@@ -8,7 +8,7 @@ RSpec.describe Api::AuctionsController do
   describe 'DELETE destroy' do
     context 'when logged in as a seller' do
       before do
-        create_seller
+        create_seller_with_auctions
 
         set_authorization_header(@seller.user.id)
       end
@@ -20,20 +20,11 @@ RSpec.describe Api::AuctionsController do
           delete :destroy, params: { id: @auctions.first.id }
         end.to change { Auction.count }.by(-1)
       end
-
-      it 'does not destroy an auction that has bids' do
-        auction = FactoryGirl.create(:auction, seller: @seller)
-        FactoryGirl.create(:bid, auction: auction)
-
-        expect do
-          delete :destroy, params: { id: auction.id }
-        end.to raise_error(ActiveRecord::RecordNotDestroyed)
-      end
     end
 
     context 'when logged in as a buyer' do
       before do
-        create_buyer
+        create_buyer_with_auctions
 
         set_authorization_header(@buyer.user.id)
       end
