@@ -27,7 +27,7 @@ class Ability
     can :create, Company if @user.buyer.company.nil?
     return unless @user.fully_verified?
 
-    can %i(index create), Bid
+    can %i(index create), Bid, buyer_id: @user.buyer.id
     can %i(index show), Auction
   end
 

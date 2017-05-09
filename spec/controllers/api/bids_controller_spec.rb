@@ -28,10 +28,26 @@ RSpec.describe Api::BidsController do
       FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 200)
       FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 300)
 
+      FactoryGirl.create(:bid, buyer: @buyer, amount: 1)
+      FactoryGirl.create(:bid, buyer: @buyer, amount: 1)
+
       get :index, params: { filter: :leading }
 
-      expect(body.count).to eq(1)
+      expect(body.count).to eq(3)
       expect(body.first['amount']).to eq('300.0')
+    end
+
+    it 'does not include bids that are not placed by the buyer' do
+      auction = FactoryGirl.create(:auction)
+      other_buyer = FactoryGirl.create(:buyer)
+
+      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 100)
+      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 200)
+      FactoryGirl.create(:bid, buyer: other_buyer, auction: auction, amount: 300)
+
+      get :index, params: { filter: :leading }
+
+      expect(body.count).to eq(0)
     end
   end
 end
