@@ -65,11 +65,24 @@ RSpec.describe Api::AuctionsController do
       end
 
       it 'shows the auctions with the buyer\'s leading bid' do
+        FactoryGirl.create(:bid, auction: Auction.first, buyer: @buyer)
+        FactoryGirl.create(:bid, auction: Auction.second, buyer: @buyer)
+        FactoryGirl.create(:bid, auction: Auction.third, buyer: @buyer)
         FactoryGirl.create(:bid)
 
         get :index, params: { with_leading_bids: true }
 
         expect(body.count).to be(3)
+      end
+
+      it 'does not show the auctions when the buyer has a non-leading bid' do
+        auction = FactoryGirl.create(:auction)
+        FactoryGirl.create(:bid, auction: auction, buyer: @buyer, amount: 10)
+        FactoryGirl.create(:bid, auction: auction, amount: 20)
+
+        get :index, params: { with_leading_bids: true }
+
+        expect(body.count).to be(0)
       end
     end
   end
