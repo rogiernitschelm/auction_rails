@@ -14,8 +14,8 @@ class Auction < ApplicationRecord
 
   validate :not_in_the_past?, :seller_is_verified?
 
-  scope :with_leading_bid, -> {
-    select('auctions.*, highest_bids.id AS highest_bid_id')
+  scope :with_leading_bids, ->(buyer) {
+    select('auctions.*, highest_Bids.amount AS highest_bid_amount, highest_bids.id AS highest_bid_id')
       .joins(
         '
           LEFT JOIN (SELECT DISTINCT ON (auction_id) *
@@ -23,7 +23,7 @@ class Auction < ApplicationRecord
         '
       )
   }
-  
+
   scope :active, -> { joins(:bids).where('bids.amount < auctions.buyout_price AND expires_at > ?', Time.zone.now) }
   scope :current_price, ->(minimum = 0, maximum = 9_999_999) {
     joins(:bids).where('bids.amount > ? AND bids.amount < ?', minimum, maximum)

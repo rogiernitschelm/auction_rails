@@ -55,12 +55,19 @@ RSpec.describe Api::AuctionsController do
     context 'logged in as a buyer' do
       before do
         create_buyer_with_auctions
-
         set_authorization_header(@buyer.user.id)
       end
 
       it 'shows a list of auctions' do
         get :index
+
+        expect(body.count).to be(3)
+      end
+
+      it 'shows the auctions with the buyer\'s leading bid' do
+        FactoryGirl.create(:bid)
+
+        get :index, params: { with_leading_bids: true }
 
         expect(body.count).to be(3)
       end

@@ -8,46 +8,19 @@ RSpec.describe Api::BidsController do
   before do
     @buyer = FactoryGirl.create(:buyer)
     @buyer.company.update_attributes!(verified: true)
+    @auction = FactoryGirl.create(:auction)
+    @lower_bid = FactoryGirl.create(:bid, auction: @auction, amount: 10)
 
     set_authorization_header(@buyer.user.id)
   end
 
-  describe 'GET index' do
-    it 'renders a list of bids' do
-      FactoryGirl.create_list(:bid, 50, buyer: @buyer)
+  it 'creates a bid' do
+    post :create, params: {
+      amount: 100,
+      auction_id: @auction.id
+    }
 
-      get :index
-
-      expect(body.count).to eq(50)
-    end
-
-    it 'renders a list of leading bids' do
-      auction = FactoryGirl.create(:auction)
-
-      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 100)
-      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 200)
-      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 300)
-
-      FactoryGirl.create(:bid, buyer: @buyer, amount: 1)
-      FactoryGirl.create(:bid, buyer: @buyer, amount: 1)
-
-      get :index, params: { filter: :leading }
-
-      expect(body.count).to eq(3)
-      expect(body.first['amount']).to eq('300.0')
-    end
-
-    it 'does not include bids that are not placed by the buyer' do
-      auction = FactoryGirl.create(:auction)
-      other_buyer = FactoryGirl.create(:buyer)
-
-      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 100)
-      FactoryGirl.create(:bid, buyer: @buyer, auction: auction, amount: 200)
-      FactoryGirl.create(:bid, buyer: other_buyer, auction: auction, amount: 300)
-
-      get :index, params: { filter: :leading }
-
-      expect(body.count).to eq(0)
-    end
+    expect(response.status).to be(200)
+    expect(body['placed_at']).not_to be(nil)
   end
 end

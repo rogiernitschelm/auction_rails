@@ -5,6 +5,7 @@ class Api::AuctionsController < ApplicationController
 
   def index
     @auctions = @auctions.active if index_params[:active]
+    @auctions = @auctions.with_leading_bids(current_user.buyer) if index_params[:with_leading_bids]
     @auctions = @auctions
       .search(index_params[:search_string])
       .offset(index_params[:offset] || 0)
@@ -52,7 +53,8 @@ class Api::AuctionsController < ApplicationController
     params.permit(
       :offset,
       :search_string,
-      :active
+      :active,
+      :with_leading_bids
     )
   end
 end

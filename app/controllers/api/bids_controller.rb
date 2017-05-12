@@ -1,24 +1,26 @@
 class Api::BidsController < ApplicationController
   load_and_authorize_resource
 
-  def index
-    @bids = @bids.leading if params[:filter] == 'leading'
-
-    render_entity MinimalBidEntity, @bids
-  end
-
   def create
-    return render json: nil, status: 422 unless @bid.valid_bid?
-
     @bid.placed_at = Time.zone.now
-    @bid.save!
+    @bid.assign_attributes(create_params)
 
-    render_entity BidEntity, @bid
+    if @bid.save!
+      render_entity BidEntity, @bid
+    else
+      render json: nil, status: 422
+    end
   end
 
   private
 
-  def index_params
-    params.permit(:filter)
+  def create_params
+    params.permit(
+      :amount,
+      :auction_id
+    ).merge(
+      buyer_id: current_user.buyer.id
+    )
   end
+
 end

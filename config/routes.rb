@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :bids, only: %i(index create)
+    resources :bids, only: :create
     resources :buyers, only: %i(show create update destroy)
     resources :companies, only: %i(create)
     resources :sellers, only: %i(show create update destroy)
