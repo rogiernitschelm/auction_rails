@@ -8,8 +8,9 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import reducer from './reducer';
-import Application from './application';
+import Application from './application/application';
 import NotFound from './application/namespaces/other/not_found';
+import { LoginContainer } from './application/namespaces/guest/login';
 import './style/index.scss';
 
 const history = createHistory();
@@ -21,7 +22,7 @@ ReactDOM.render(
       <Application>
         <Switch>
           <Route exact path="/registration" />
-          <Route exact path="/login" />
+          <Route exact path="/login" component={LoginContainer} />
 
           <Route path="/seller" />
           <Route path="/buyer" />
