@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { LoginContainer } from './';
+import { Container, Row, Col } from 'react-grid-system';
+import LoginContainer from './container';
 
 @LoginContainer
 export default class LoginComponent extends Component {
   render() {
     return (
-      <div>Login stuff</div>
+      <Container>
+        <Row>
+          <Col xs={12}>
+            LOGIN
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

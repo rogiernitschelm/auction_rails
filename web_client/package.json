@@ -10,12 +10,15 @@
   },
   "dependencies": {
     "history": "^4.6.1",
+    "material-ui": "latest",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-grid-system": "^2.9.1",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-form": "^6.7.0",
     "redux-thunk": "^2.2.0"

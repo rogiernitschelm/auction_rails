@@ -1,7 +1,7 @@
 {
   "extends": "rallycoding",
   "rules": {
-    "arrow-body-style": ["error", "as-needed"]
+    "arrow-body-style": 0
   },
   "globals": {
     "document": true,
