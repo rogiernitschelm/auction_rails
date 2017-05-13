@@ -15,6 +15,7 @@ gem 'rails', '~> 5.0.2'
 gem 'table_print'
 
 group :development, :test do
+  gem 'sidekiq'
   gem 'byebug', platform: :mri
   gem 'faker'
   gem 'rspec-rails', '~> 3.5'
