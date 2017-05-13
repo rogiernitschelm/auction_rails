@@ -4,7 +4,7 @@ export default ComposedComponent => {
   class LoginContainer extends Component {
     render() {
       return (
-        <ComposedComponent />
+        <ComposedComponent {...this.props} />
       );
     }
   }

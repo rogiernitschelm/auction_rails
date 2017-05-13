@@ -9,7 +9,7 @@ class AuthorizationsController < ApplicationController
     if user && user.authenticate(params[:password])
       auth_token = JsonWebToken.encode(user_id: user.id)
 
-      render json: { auth_token: auth_token }, status: 200
+      render json: { auth_token: auth_token, usertype: user.usertype }, status: 200
     else
       render json: { error: :invalid_username_or_password }, status: 403
     end

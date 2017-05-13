@@ -43,7 +43,8 @@ module.exports = {
   resolve: {
     alias: {
       assets: path.resolve(__dirname, 'src', 'assets'),
-      common: path.resolve(__dirname, 'src', 'namespaces', 'common'),
+      common: path.resolve(__dirname, 'src', 'application', 'namespaces', 'common'),
+      authentication: path.resolve(__dirname, 'src', 'application', 'namespaces', 'authentication'),
     }
   },
   plugins: [
@@ -54,5 +55,13 @@ module.exports = {
     compress: true,
     port: 8080,
     hot: true
-  }
+  },
+  externals: {
+    config: JSON.stringify(
+      {
+        authorizations: 'http://localhost:5100/authorizations',
+        api: 'http://localhost:5100/api',
+        admin: 'http://localhost:5100/admin'
+      })
+  },
 };

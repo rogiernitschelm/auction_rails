@@ -5,7 +5,8 @@
   },
   "globals": {
     "document": true,
-    "window": true
+    "window": true,
+    "localStorage": true
   },
   "settings": {
     "import/core-modules": [

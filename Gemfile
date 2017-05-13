@@ -13,6 +13,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
 gem 'table_print'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   gem 'sidekiq'

@@ -33,6 +33,11 @@ class User < ApplicationRecord
     false
   end
 
+  def usertype
+    'buyer' if buyer?
+    'seller' if seller?
+  end
+
   def fully_verified?
     return seller.verified? && seller.company.verified? if seller?
 
