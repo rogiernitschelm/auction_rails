@@ -33,18 +33,6 @@ RSpec.describe User, type: :model do
   end
 
   context 'when creating users' do
-    it 'creates a new user with a seller' do
-      create_user
-
-      expect(@user.seller).not_to be(nil)
-    end
-
-    it 'creates a new user with a buyer' do
-      create_user('buyer')
-
-      expect(@user.buyer).not_to be(nil)
-    end
-
     it 'downcases an email' do
       user = create_user(email: 'SNAIL@HOOGLE.NOM')
 

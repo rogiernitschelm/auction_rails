@@ -10,6 +10,8 @@ class CreateAuctions < ActiveRecord::Migration[5.0]
       t.references :seller,           null: false
       t.datetime :expires_at,         null: false
 
+      t.datetime :finished_at
+
       t.timestamps
     end
   end

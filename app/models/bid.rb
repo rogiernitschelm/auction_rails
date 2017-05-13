@@ -4,10 +4,11 @@ class Bid < ApplicationRecord
 
   validate :valid_bid?
 
-  private
-
   def surpasses_buyout_amount?
+    amount > auction.buyout_price
   end
+
+  private
 
   def valid_bid?
     return false unless auction.active?
@@ -16,6 +17,3 @@ class Bid < ApplicationRecord
     amount > auction.bids.order('amount DESC').first.amount
   end
 end
-
-
-# Bid.joins(:auction).where('bids.amount = (SELECT MAX(bids.amount) FROM bids GROUP BY bids.id)')

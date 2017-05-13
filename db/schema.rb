@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170506180903) do
     t.decimal  "buyout_price",   precision: 10, scale: 2
     t.integer  "seller_id",                               null: false
     t.datetime "expires_at",                              null: false
+    t.datetime "finished_at"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.index ["seller_id"], name: "index_auctions_on_seller_id", using: :btree

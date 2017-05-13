@@ -5,6 +5,7 @@ class Api::BidsController::MinimalBidEntity < BaseEntity
     expose :title
   end
 
+  expose :id
   expose :auction, using: AuctionEntity
   expose :amount
   expose :placed_at

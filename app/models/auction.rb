@@ -1,8 +1,8 @@
 class Auction < ApplicationRecord
   include SearchHelper
 
-  before_destroy :assert_no_bids_present
-  before_update :assert_no_bids_present
+  before_destroy :bids_present?
+  before_update :assert_valid_update
 
   has_many :bids, dependent: :destroy
   belongs_to :seller
@@ -31,7 +31,9 @@ class Auction < ApplicationRecord
   }
 
   def active?
-    expires_at > Time.zone.now && highest_bid < buyout_price
+    return false if finished_at
+
+    expires_at > Time.zone.now
   end
 
   private
@@ -52,7 +54,15 @@ class Auction < ApplicationRecord
     bids.order('amount DESC').first.amount
   end
 
-  def assert_no_bids_present
-    throw :abort unless bids.empty?
+  def bids_present?
+    return true if bids.empty?
+
+    throw :abort
+  end
+
+  def assert_valid_update
+    return true if changed == ['finished_at', 'updated_at']
+
+    bids_present?
   end
 end

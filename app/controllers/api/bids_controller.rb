@@ -2,14 +2,10 @@ class Api::BidsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @bid.placed_at = Time.zone.now
     @bid.assign_attributes(create_params)
+    AdvancedCreateAction.run(@bid)
 
-    if @bid.save!
-      render_entity BidEntity, @bid
-    else
-      render json: nil, status: 422
-    end
+    render_entity BidEntity, @bid
   end
 
   private
@@ -22,5 +18,4 @@ class Api::BidsController < ApplicationController
       buyer_id: current_user.buyer.id
     )
   end
-
 end
