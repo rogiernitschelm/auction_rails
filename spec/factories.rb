@@ -36,7 +36,6 @@ FactoryGirl.define do
 end
 
 FactoryGirl.define do
-
   # User-related
 
   factory :company do
@@ -71,6 +70,12 @@ FactoryGirl.define do
 
   factory :person, class: :user do
     city Faker::Address
+  end
+
+  factory :complaint do
+    title Faker::Lorem.sentence
+    content Faker::Lorem.sentence
+    user
   end
 
   # Auction related

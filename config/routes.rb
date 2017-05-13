@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
+    resources :complaints, only: :create
     resources :bids, only: :create
     resources :buyers, only: %i(show create update destroy)
     resources :companies, only: %i(create)
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :complaints, only: :index
     resources :bids, only: %i(destroy)
     resources :users, only: %i(index destroy)
     resources :sellers, only: %i(show update destroy)

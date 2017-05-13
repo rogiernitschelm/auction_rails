@@ -2,6 +2,10 @@ class Bid < ApplicationRecord
   belongs_to :auction
   belongs_to :buyer
 
+  validates :amount, presence: true
+  validates :auction, presence: true
+  validates :placed_at, presence: true
+  
   validate :valid_bid?
 
   def surpasses_buyout_amount?

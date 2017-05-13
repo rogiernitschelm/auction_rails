@@ -5,30 +5,27 @@ RSpec.describe Admin::BuyersController do
   include AuthorizationHelpers
   include ControllerHelpers
 
+  before do
+    admin = FactoryGirl.create(:user, admin: true)
+    @buyer = FactoryGirl.create(:buyer)
+
+    set_authorization_header(admin.id)
+  end
+
   describe 'GET show' do
     it 'shows a buyer' do
-      admin = FactoryGirl.create(:user, admin: true)
-      buyer = FactoryGirl.create(:buyer)
+      get :show, params: { id: @buyer.id }
 
-      set_authorization_header(admin.id)
-
-      get :show, params: { id: buyer.id }
-
-      expect(body['user']['email']).to eq(buyer.user.email)
+      expect(body['user']['email']).to eq(@buyer.user.email)
     end
   end
 
   describe 'PUT update' do
     it 'updates a buyer' do
-      admin = FactoryGirl.create(:user, admin: true)
-      buyer = FactoryGirl.create(:buyer)
-
-      set_authorization_header(admin.id)
-
       put :update,
 
         params: {
-          id: buyer.id,
+          id: @buyer.id,
           email: 'fail@moogle.lom'
         }
 
@@ -38,12 +35,7 @@ RSpec.describe Admin::BuyersController do
 
   describe 'DELETE destroy' do
     it 'destroys a buyer' do
-      admin = FactoryGirl.create(:user, admin: true)
-      buyer = FactoryGirl.create(:buyer)
-
-      set_authorization_header(admin.id)
-
-      delete :destroy, params: { id: buyer.id }
+      delete :destroy, params: { id: @buyer.id }
 
       expect(Buyer.count).to be(0)
     end
