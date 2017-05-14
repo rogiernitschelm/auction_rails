@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { RequireNoSession, login, mapStateToProps } from 'authentication';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { RequireNoSession, login } from 'authentication';
+import { mapStateToProps } from './';
 
 @connect(mapStateToProps, { login })
 @reduxForm({ form: 'login', fields: ['email', 'password'] })

@@ -26,7 +26,6 @@ export default class LoginComponent extends Component {
     return (
       <HeroFullHeight>
         <Form title="Log in" onSubmit={handleSubmit(onSubmit)} error={error}>
-
           <Input
             autoFocus
             label="E-mail"
@@ -35,7 +34,6 @@ export default class LoginComponent extends Component {
             type="email"
           />
           <Input
-            autoFocus
             label="Wachtwoord"
             name="password"
             placeholder="Jouw wachtwoord"
