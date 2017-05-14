@@ -22,6 +22,16 @@ export default class Navigation extends Component {
     );
   }
 
+  renderAccountButton() {
+    if (this.props.authenticated) {
+      return (
+        <NavItem className="is-tab" to={`${this.props.usertype}/account`}>
+          Account
+        </NavItem>
+      );
+    }
+  }
+
   render() {
     return (
       <Nav className="has-shadow">
@@ -31,9 +41,7 @@ export default class Navigation extends Component {
           </NavItem>
         </NavLeft>
         <NavRight>
-          <NavItem className="is-tab">
-            Account
-          </NavItem>
+          {this.renderAccountButton()}
           {this.renderSessionButton()}
         </NavRight>
       </Nav>
