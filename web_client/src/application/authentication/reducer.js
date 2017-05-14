@@ -2,6 +2,9 @@ import {
   AUTHENTICATE,
   AUTHENTICATE_SUCCESS,
   AUTHENTICATE_FAILURE,
+
+  REGISTRATION_SUCCESS,
+  REGISTRATION_FAILURE,
   LOGOUT
 } from './';
 
@@ -36,7 +39,23 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         error: action.error.message,
         loading: false
+      };
+    }
 
+    case REGISTRATION_SUCCESS: {
+      return {
+        ...state,
+        error: null,
+        loading: false,
+        authenticated: true
+      };
+    }
+
+    case REGISTRATION_FAILURE: {
+      return {
+        ...state,
+        error: action.error.message,
+        loading: false
       };
     }
 

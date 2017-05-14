@@ -6,8 +6,8 @@ import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
 
-import promise from './promise';
-import jwtStorage from './jwt_storage';
+import promise from './middlewares/promise';
+import jwtStorage from './middlewares/jwt_storage';
 import reducer from './reducer';
 
 import Application from './application/application';

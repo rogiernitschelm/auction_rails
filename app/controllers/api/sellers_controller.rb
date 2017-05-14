@@ -15,7 +15,9 @@ class Api::SellersController < ApplicationController
       @seller.save!
     end
 
-    render_entity SellerEntity, @seller
+    auth_token = JsonWebToken.encode(user_id: @seller.user.id)
+
+    render json: { auth_token: auth_token, usertype: @seller.user.usertype }
   end
 
   def show

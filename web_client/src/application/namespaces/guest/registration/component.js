@@ -36,7 +36,7 @@ export default class LoginComponent extends Component {
             label="Achternaam"
             name="lastName"
             placeholder="Jouw achternaam"
-            type="email"
+            type="text"
           />
 
           <Input
@@ -45,7 +45,6 @@ export default class LoginComponent extends Component {
             type="select"
             options={options}
           />
-
 
           <Input
             label="Wachtwoord"

@@ -26,6 +26,7 @@ export const renderField = props => {
 
     return (
       <div className="field">
+        <label className="label" htmlFor={label}>{label}</label>
         <p className="control">
           <span className="select">
             <select {...input}>

@@ -33,7 +33,7 @@ export const registration = userInformation => {
     types: [REGISTRATION, REGISTRATION_SUCCESS, REGISTRATION_FAILURE],
     promise: {
       method: 'post',
-      path: 'registration',
+      path: `${userInformation.usertype}s`,
       root: 'api',
       params: userInformation
     }

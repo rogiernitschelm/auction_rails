@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { RequireNoSession, login } from 'authentication';
+import { RequireNoSession, login, registration } from 'authentication';
 import { mapStateToProps } from './';
 
 const fields = [
@@ -17,7 +17,7 @@ const options = [
   { text: 'Aanbieder', value: 'seller' }
 ];
 
-@connect(mapStateToProps, { login })
+@connect(mapStateToProps, { registration })
 @reduxForm({ form: 'registration', fields })
 @RequireNoSession
 export default ComposedComponent => {
@@ -29,7 +29,7 @@ export default ComposedComponent => {
     }
 
     onSubmit(userInformation) {
-      this.props.register(userInformation);
+      this.props.registration(userInformation);
     }
 
     render() {
