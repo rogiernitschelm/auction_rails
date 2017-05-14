@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps, login } from './';
+import { mapStateToProps, login } from '../';
 
 @connect(mapStateToProps, { login })
 export default ComposedComponent => {

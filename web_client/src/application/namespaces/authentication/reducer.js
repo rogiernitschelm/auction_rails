@@ -1,10 +1,10 @@
-import { actionTypes } from './';
+import { types } from './';
 
 const {
   AUTHENTICATE_SUCCESS,
   AUTHENTICATE_FAILURE,
   LOGOUT
-} = actionTypes;
+} = types;
 
 const INITIAL_STATE = {
   authenticated: false,

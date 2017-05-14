@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -43,8 +43,9 @@ module.exports = {
   resolve: {
     alias: {
       assets: path.resolve(__dirname, 'src', 'assets'),
-      common: path.resolve(__dirname, 'src', 'application', 'namespaces', 'common'),
       authentication: path.resolve(__dirname, 'src', 'application', 'namespaces', 'authentication'),
+      common: path.resolve(__dirname, 'src', 'application', 'namespaces', 'common'),
+      helpers: path.resolve(__dirname, 'src', 'application', 'helpers'),
     }
   },
   plugins: [
