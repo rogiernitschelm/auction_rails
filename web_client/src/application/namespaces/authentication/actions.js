@@ -1,34 +1,25 @@
-import config from 'config';
-import axios from 'axios';
-import { actionTypes } from 'helpers';
+export const AUTHENTICATE = 'AUTHENTICATE';
+export const AUTHENTICATE_SUCCESS = 'AUTHENTICATE_SUCCESS';
+export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
 
-export const types = actionTypes({
-  AUTHENTICATE: 'AUTHENTICATE',
-  AUTHENTICATE_SUCCESS: 'AUTHENTICATE_SUCCESS',
-  AUTHENTICATE_FAILURE: 'AUTHENTICATE_FAILURE',
-
-  LOGOUT: 'LOGOUT'
-});
+export const LOGOUT = 'LOGOUT';
 
 export const login = credentials => {
-  return async dispatch => {
-    dispatch({ type: types.AUTHENTICATE });
-
-    try {
-      const loginResponse = await axios.post(`${config.authorizations}/login`, credentials);
-      localStorage.setItem('auth_token', loginResponse.data.auth_token);
-
-      dispatch({ type: types.AUTHENTICATE_SUCCESS, payload: loginResponse });
-    } catch (error) {
-      dispatch({ type: types.AUTHENTICATE_FAILURE, payload: error });
+  return {
+    types: [AUTHENTICATE, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILURE],
+    promise: {
+      method: 'post',
+      path: '/login',
+      root: 'authorizations',
+      params: credentials
     }
   };
 };
 
 export const logout = () => {
-  return dispatch => {
-    localStorage.removeItem('auth_token');
+  localStorage.removeItem('auth_token');
 
-    dispatch({ type: types.LOGOUT });
+  return {
+    type: LOGOUT
   };
 };

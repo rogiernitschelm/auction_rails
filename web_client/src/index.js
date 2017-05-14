@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reduxThunk from 'redux-thunk';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
@@ -13,8 +12,10 @@ import NotFound from './application/namespaces/other/not_found';
 import { LoginComponent } from './application/namespaces/guest/login';
 import './style/index.scss';
 
+import middleware from './middleware';
+
 const history = createHistory();
-const store = applyMiddleware(reduxThunk)(createStore);
+const store = applyMiddleware(middleware)(createStore);
 
 ReactDOM.render(
   <Provider store={store(reducer)}>

@@ -63,6 +63,7 @@ module.exports = {
         authorizations: 'http://localhost:5100/authorizations',
         api: 'http://localhost:5100/api',
         admin: 'http://localhost:5100/admin'
-      })
+      }
+    )
   },
 };
