@@ -43,8 +43,8 @@ module.exports = {
   resolve: {
     alias: {
       assets: path.resolve(__dirname, 'src', 'assets'),
-      authentication: path.resolve(__dirname, 'src', 'application', 'namespaces', 'authentication'),
-      common: path.resolve(__dirname, 'src', 'application', 'namespaces', 'common'),
+      authentication: path.resolve(__dirname, 'src', 'application', 'authentication'),
+      common: path.resolve(__dirname, 'src', 'application', 'common'),
       helpers: path.resolve(__dirname, 'src', 'application', 'helpers'),
     }
   },

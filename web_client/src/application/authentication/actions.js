@@ -4,14 +4,14 @@ export const AUTHENTICATE_FAILURE = 'AUTHENTICATE_FAILURE';
 
 export const LOGOUT = 'LOGOUT';
 
-export const login = credentials => {
+export const login = ({ email, password }) => {
   return {
     types: [AUTHENTICATE, AUTHENTICATE_SUCCESS, AUTHENTICATE_FAILURE],
     promise: {
       method: 'post',
-      path: '/login',
+      path: 'login',
       root: 'authorizations',
-      params: credentials
+      params: { email, password }
     }
   };
 };

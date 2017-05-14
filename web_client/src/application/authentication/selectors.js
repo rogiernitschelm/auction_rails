@@ -1,6 +1,7 @@
 export const mapStateToProps = state => {
   return {
     authenticated: state.authentication.authenticated,
-    usertype: state.authentication.usertype
+    usertype: state.authentication.usertype,
+    error: state.authentication.error
   };
 };

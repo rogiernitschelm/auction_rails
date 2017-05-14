@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { mapStateToProps, login } from '../';
+import { mapStateToProps } from '../';
 
-@connect(mapStateToProps, { login })
+@connect(mapStateToProps)
 export default ComposedComponent => {
   class RequireNoSession extends Component {
     state = { redirect: false };

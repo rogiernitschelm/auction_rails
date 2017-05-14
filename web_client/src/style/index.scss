@@ -1,2 +1,9 @@
-@import './imports';
+@import './bulma/utilities/all';
+@import './bulma/base/all';
+@import './bulma/components/all';
+@import './bulma/elements/all';
+@import './bulma/grid/all';
+@import './bulma/layout/all';
+
+@import '../application/common/index';
 @import './custom/global';

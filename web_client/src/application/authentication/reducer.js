@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   authenticated: localStorage.getItem('auth_token') ? true : false,
   loading: false,
   usertype: {},
-  error: {}
+  error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case AUTHENTICATE: {
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     }
 
@@ -26,15 +26,17 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         authenticated: true,
         usertype: action.payload.data.usertype,
-        loading: false
+        loading: false,
+        error: null
       };
     }
 
     case AUTHENTICATE_FAILURE: {
       return {
         ...state,
-        error: action.error,
+        error: action.error.message,
         loading: false
+
       };
     }
 
