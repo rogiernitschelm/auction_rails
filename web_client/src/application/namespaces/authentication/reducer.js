@@ -6,7 +6,7 @@ import {
 } from './';
 
 const INITIAL_STATE = {
-  authenticated: false,
+  authenticated: localStorage.getItem('auth_token') ? true : false,
   loading: false,
   usertype: {},
   error: {}
