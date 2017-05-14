@@ -101,7 +101,7 @@ export const Form = props => {
               {renderError()}
 
               {children}
-              <button className="button">
+              <button className="button is-primary">
                 {submit}
               </button>
             </form>

@@ -4,22 +4,6 @@ import { Form, Input, HeroFullHeight } from 'common';
 
 @LoginContainer
 export default class LoginComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onSubmit = ::this.onSubmit;
-  }
-
-  onLogin() {
-    this.props.login({ email: 'mail@hoogle.nom', password: 'abcd1234' });
-  }
-
-  onSubmit({ email, password }) {
-    if (email && password) {
-      this.props.login({ email, password });
-    }
-  }
-
   render() {
     const { handleSubmit, onSubmit, error } = this.props;
 
