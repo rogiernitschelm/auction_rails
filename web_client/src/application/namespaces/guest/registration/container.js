@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { RequireNoSession, login, registration } from 'authentication';
+import { RequireNoSession, registration } from 'authentication';
 import { mapStateToProps } from './';
 
 const fields = [

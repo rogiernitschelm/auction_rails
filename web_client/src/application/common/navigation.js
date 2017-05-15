@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const Nav = ({ children, className }) => {
+export const Nav = ({ children, className = '' }) => {
   return (
     <nav className={`nav ${className}`}>
        <div className="container">
@@ -11,7 +11,7 @@ export const Nav = ({ children, className }) => {
   );
 };
 
-export const NavItem = ({ children, className, onClick = () => {}, to = '/' }) => {
+export const NavItem = ({ children, className = '', onClick = () => {}, to = '/' }) => {
   return (
     <Link className={`nav-item ${className}`} to={to} onClick={onClick}>
       {children}
@@ -19,7 +19,7 @@ export const NavItem = ({ children, className, onClick = () => {}, to = '/' }) =
   );
 };
 
-export const NavLeft = ({ children, className }) => {
+export const NavLeft = ({ children, className = '' }) => {
   return (
     <div className={`nav-left ${className}`}>
       {children}
@@ -27,7 +27,7 @@ export const NavLeft = ({ children, className }) => {
   );
 };
 
-export const NavCenter = ({ children, className }) => {
+export const NavCenter = ({ children, className = '' }) => {
   return (
     <div className={`nav-center ${className}`}>
       {children}
@@ -35,7 +35,7 @@ export const NavCenter = ({ children, className }) => {
   );
 };
 
-export const NavRight = ({ children, className }) => {
+export const NavRight = ({ children, className = '' }) => {
   return (
     <div className={`nav-right ${className}`}>
       {children}

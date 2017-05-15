@@ -27,17 +27,19 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <Application>
         <Navigation />
-        <Switch>
-          <Route exact path="/" component={Welcome} />
-          <Route exact path="/registration" component={RegistrationComponent} />
-          <Route exact path="/login" component={LoginComponent} />
+          <main>
+            <Switch>
+              <Route exact path="/" component={Welcome} />
+              <Route exact path="/registration" component={RegistrationComponent} />
+              <Route exact path="/login" component={LoginComponent} />
 
-          <Route path="/seller" />
-          <Route path="/buyer" />
-          <Route path="/admin" />
+              <Route path="/seller" />
+              <Route path="/buyer" />
+              <Route path="/admin" />
 
-          <Route component={NotFound} />
-        </Switch>
+              <Route component={NotFound} />
+            </Switch>
+          </main>
         <Footer />
       </Application>
     </ConnectedRouter>

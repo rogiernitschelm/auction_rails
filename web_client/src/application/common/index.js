@@ -4,3 +4,4 @@ export * from './footer';
 export * from './links';
 export * from './hero';
 export * from './forms';
+export * from './information';

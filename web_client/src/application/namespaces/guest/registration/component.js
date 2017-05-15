@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RegistrationContainer } from './';
-import { Form, Input, HeroFullHeight } from 'common';
+import { Form, Input, Hero } from 'common';
 
 @RegistrationContainer
 export default class LoginComponent extends Component {
@@ -8,8 +8,8 @@ export default class LoginComponent extends Component {
     const { handleSubmit, onSubmit, error, options } = this.props;
 
     return (
-      <HeroFullHeight>
-        <Form title="Log in" onSubmit={handleSubmit(onSubmit)} error={error}>
+      <Hero className="is-fullheight is-bold is-primary">
+        <Form title="Gebruikersregistratie" onSubmit={handleSubmit(onSubmit)} error={error}>
           <Input
             autoFocus
             label="E-mail"
@@ -53,7 +53,7 @@ export default class LoginComponent extends Component {
             type="password"
           />
         </Form>
-      </HeroFullHeight>
+      </Hero>
     );
   }
 }

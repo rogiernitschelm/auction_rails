@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const Hero = ({ children, title, subtitle }) => {
+export const Hero = ({ children, title, subtitle, className = '' }) => {
   return (
-    <section className="hero">
+    <section className={`hero ${className}`}>
       <div className="hero-body">
         <div className="container">
           <h1 className="title">{title}</h1>

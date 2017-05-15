@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginContainer from './container';
-import { Form, Input, HeroFullHeight } from 'common';
+import { Form, Input, Hero, Section } from 'common';
 
 @LoginContainer
 export default class LoginComponent extends Component {
@@ -8,7 +8,7 @@ export default class LoginComponent extends Component {
     const { handleSubmit, onSubmit, error } = this.props;
 
     return (
-      <HeroFullHeight>
+      <Hero className="is-fullheight is-primary is-bold">
         <Form title="Log in" onSubmit={handleSubmit(onSubmit)} error={error}>
           <Input
             autoFocus
@@ -24,7 +24,7 @@ export default class LoginComponent extends Component {
             type="password"
           />
         </Form>
-      </HeroFullHeight>
+      </Hero>
     );
   }
 }

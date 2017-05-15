@@ -30,6 +30,12 @@ export default class Navigation extends Component {
         </NavItem>
       );
     }
+
+    return (
+      <NavItem className="is-tab" to="/registration">
+        Registratie
+      </NavItem>
+    );
   }
 
   render() {
