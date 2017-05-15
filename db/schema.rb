@@ -66,8 +66,10 @@ ActiveRecord::Schema.define(version: 20170513194022) do
     t.string   "title"
     t.string   "content"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "target_user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["target_user_id"], name: "index_complaints_on_target_user_id", using: :btree
     t.index ["user_id"], name: "index_complaints_on_user_id", using: :btree
   end
 

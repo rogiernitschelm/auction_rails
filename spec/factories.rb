@@ -60,7 +60,7 @@ FactoryGirl.define do
     company
   end
 
-  factory :user do
+  factory :user, aliases: [:target_user] do
     first_name Faker::Name.first_name
     last_name Faker::Name.last_name
     email
@@ -76,6 +76,7 @@ FactoryGirl.define do
     title Faker::Lorem.sentence
     content Faker::Lorem.sentence
     user
+    target_user
   end
 
   # Auction related

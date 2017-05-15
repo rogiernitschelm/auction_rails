@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_secure_password
   before_save :downcase
 
+  has_many :complaints, dependent: :destroy
   has_one :buyer, dependent: :destroy
   has_one :seller, dependent: :destroy
 
