@@ -42,7 +42,6 @@ export const renderField = props => {
     <div className="field">
       <label className="label" htmlFor={label}>{label}</label>
       <p className="control">
-
         <input
           {...input}
           className="input"
@@ -51,8 +50,8 @@ export const renderField = props => {
           placeholder={placeholder}
           type={type}
         />
-        {touched && error && <span>{error}</span>}
       </p>
+      {touched && error && <p className="help is-danger">{error}</p>}
     </div>
   );
 };

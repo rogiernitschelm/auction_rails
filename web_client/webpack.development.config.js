@@ -46,6 +46,7 @@ module.exports = {
       authentication: path.resolve(__dirname, 'src', 'application', 'authentication'),
       common: path.resolve(__dirname, 'src', 'application', 'common'),
       helpers: path.resolve(__dirname, 'src', 'helpers'),
+      customization: path.resolve(__dirname, 'src', 'customization')
     }
   },
   plugins: [
