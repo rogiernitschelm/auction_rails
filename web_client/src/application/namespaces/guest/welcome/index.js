@@ -1,11 +1,27 @@
 import React from 'react';
-import { Hero, HeroFullHeight, Section, Container, Columns, Column, Box } from 'common';
+import { Hero } from 'common';
+import { connect } from 'react-redux';
+import { mapStateToProps } from 'authentication';
+import LoginComponent from '../shared/login_form';
 
-export default () => {
+const Welcome = props => {
+  const renderLogin = () => {
+    if (!props.authenticated) {
+      return <LoginComponent />;
+    }
+  };
+
   return (
     <div>
-      <Hero title="Reclameveiling" subtitle="Adverteren tot je erbij neervalt." className="is-large is-bold is-primary"/>
+      <Hero
+        title="Reclameveiling"
+        subtitle="Adverteren tot je erbij neervalt."
+        className={`is-${props.authenticated ? 'large' : 'medium'} is-bold is-primary`}
+      >
 
+        {renderLogin()}
+
+      </Hero>
       {/* <Container>
         <TileAncestor>
           <TileParent>
@@ -51,3 +67,5 @@ export default () => {
     </div>
   );
 };
+
+export default connect(mapStateToProps)(Welcome);

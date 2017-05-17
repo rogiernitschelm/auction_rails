@@ -14,8 +14,8 @@ import Application from './application/application';
 import Navigation from './application/navigation';
 import Footer from './application/footer';
 import NotFound from './application/namespaces/other/not_found';
-import { LoginComponent } from './application/namespaces/guest/login';
-import { RegistrationComponent } from './application/namespaces/guest/registration';
+import Login from './application/namespaces/guest/login';
+import Registration from './application/namespaces/guest/registration';
 import Welcome from './application/namespaces/guest/welcome';
 import './style/index.scss';
 
@@ -30,8 +30,8 @@ ReactDOM.render(
           <main>
             <Switch>
               <Route exact path="/" component={Welcome} />
-              <Route exact path="/registration" component={RegistrationComponent} />
-              <Route exact path="/login" component={LoginComponent} />
+              <Route exact path="/registration" component={Registration} />
+              <Route exact path="/login" component={Login} />
 
               <Route path="/seller" />
               <Route path="/buyer" />

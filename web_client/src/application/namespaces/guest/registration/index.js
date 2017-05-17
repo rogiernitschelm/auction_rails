@@ -1,3 +1,8 @@
-export { default as RegistrationContainer } from './container';
-export { default as RegistrationComponent } from './component';
-export { default as mapStateToProps } from './selectors';
+import React from 'react';
+import { Hero } from 'common';
+import RegistrationComponent from '../shared/registration_form';
+
+export default () =>
+  <Hero className="is-fullheight is-primary is-bold">
+    <RegistrationComponent />
+  </Hero>;

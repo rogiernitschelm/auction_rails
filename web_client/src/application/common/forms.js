@@ -92,7 +92,7 @@ export const Form = props => {
   return (
     <div className="container">
       <div className="columns is-vcentered">
-        <div className="column is-4 is-offset-4">
+        <div className="column is-6 is-offset-3">
           <h2 className="subtitle is-2">
             {title}
           </h2>

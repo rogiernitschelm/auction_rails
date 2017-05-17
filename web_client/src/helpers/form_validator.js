@@ -1,8 +1,8 @@
 import validations from 'customization/validations';
 import camelCaseKeys from 'camelcase-keys';
 
-const checkMinimumLength = (length, value) => value.length > length;
-const checkMaximumLength = (length, value) => value.length < length;
+const checkMinimumLength = (length, value) => value.length >= length;
+const checkMaximumLength = (length, value) => value.length <= length;
 
 const fieldValidator = (key, value, { kind, options }) => {
   if (!value && kind === 'presence') {
