@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { RegistrationContainer } from './';
+import RegistrationContainer from './container';
 import { Form, Input } from 'common';
 
 @RegistrationContainer
 export default class LoginComponent extends Component {
   render() {
-    const { handleSubmit, onSubmit, error, options } = this.props;
+    const { handleSubmit, onSubmit, registrationError, options } = this.props;
 
     return (
-      <Form title="Gebruikersregistratie" onSubmit={handleSubmit(onSubmit)} error={error}>
+      <Form
+        title="Gebruikersregistratie"
+        onSubmit={handleSubmit(onSubmit)}
+        error={registrationError}
+      >
         <Input
           autoFocus
           label="E-mail"

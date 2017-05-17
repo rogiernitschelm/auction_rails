@@ -5,10 +5,10 @@ import { Form, Input } from 'common';
 @LoginContainer
 export default class LoginComponent extends Component {
   render() {
-    const { handleSubmit, onSubmit, error } = this.props;
+    const { handleSubmit, onSubmit, loginError } = this.props;
 
     return (
-      <Form title="Log in" onSubmit={handleSubmit(onSubmit)} error={error}>
+      <Form title="Log in" onSubmit={handleSubmit(onSubmit)} error={loginError}>
         <Input
           autoFocus
           label="E-mail"

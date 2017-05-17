@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { RequireNoSession, registration } from 'authentication';
+import { RequireNoSession, registration, unmount } from 'authentication';
 import { userFormValidator as validate} from 'helpers';
-import { mapStateToProps } from './';
+import mapStateToProps from './selectors';
 
 const fields = [
   'email',
@@ -18,7 +18,7 @@ const options = [
   { text: 'Aanbieder', value: 'seller' }
 ];
 
-@connect(mapStateToProps, { registration })
+@connect(mapStateToProps, { registration, unmount })
 @reduxForm({ form: 'registration', fields, validate })
 @RequireNoSession
 export default ComposedComponent => {
@@ -27,6 +27,10 @@ export default ComposedComponent => {
       super(props);
 
       this.onSubmit = ::this.onSubmit;
+    }
+
+    componentWillUnmount() {
+      this.props.unmount();
     }
 
     onSubmit(userInformation) {

@@ -1,1 +1,1 @@
-export default state => state.authenticated.error;
+export default state => ({ registrationError: state.authentication.error });

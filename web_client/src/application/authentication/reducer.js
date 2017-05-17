@@ -5,7 +5,8 @@ import {
 
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILURE,
-  LOGOUT
+  LOGOUT,
+  UNMOUNT
 } from './';
 
 const INITIAL_STATE = {
@@ -63,6 +64,13 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         authenticated: false
+      };
+    }
+
+    case UNMOUNT: {
+      return {
+        ...state,
+        error: ''
       };
     }
 
