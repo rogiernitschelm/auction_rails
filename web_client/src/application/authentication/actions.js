@@ -6,6 +6,10 @@ export const REGISTRATION = 'REGISTRATION';
 export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
 export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE';
 
+export const GET_CURRENT_USER = 'GET_CURRENT_USER';
+export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS';
+export const GET_CURRENT_USER_FAILURE = 'GET_CURRENT_USER_FAILURE';
+
 export const LOGOUT = 'LOGOUT';
 export const UNMOUNT = 'UNMOUNT';
 
@@ -39,6 +43,17 @@ export const registration = userInformation => {
       path: `${userInformation.usertype}s`,
       root: 'api',
       params: userInformation
+    }
+  };
+};
+
+export const getCurrentUser = () => {
+  return {
+    types: [GET_CURRENT_USER, GET_CURRENT_USER_SUCCESS, GET_CURRENT_USER_FAILURE],
+    promise: {
+      method: 'get',
+      path: 'get_current_user',
+      root: 'authorizations'
     }
   };
 };

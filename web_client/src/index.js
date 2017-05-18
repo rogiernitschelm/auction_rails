@@ -17,6 +17,7 @@ import NotFound from './application/namespaces/other/not_found';
 import Login from './application/namespaces/guest/login';
 import Registration from './application/namespaces/guest/registration';
 import Welcome from './application/namespaces/guest/welcome';
+import Account from './application/namespaces/account';
 import './style/index.scss';
 
 const history = createHistory();
@@ -36,6 +37,8 @@ ReactDOM.render(
               <Route path="/seller" />
               <Route path="/buyer" />
               <Route path="/admin" />
+
+              <Route path="/account" component={Account} />
 
               <Route component={NotFound} />
             </Switch>

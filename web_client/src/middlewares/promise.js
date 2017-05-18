@@ -12,19 +12,17 @@ export default ({ dispatch }) => {
     }
 
     const token = localStorage.getItem('auth_token') || null;
-    const renderHeaders = [AUTHENTICATE, REGISTRATION].includes(action.type);
-    const headers = renderHeaders ? { headers: { Authorization: token } } : null;
-
     const [, SUCCESS, FAILURE] = types;
     const { path, method = 'get', params = {}, root = 'api' } = promise;
     let response;
 
     try {
-      response = await axios[method](
-        `${config[root]}/${path}`,
-        { ...snakeCaseKeys(params) },
-        { headers }
-      );
+      response = await axios.request({
+        url: `${config[root]}/${path}`,
+        method,
+        data: params,
+        headers: { authorization: token }
+      });
 
       return dispatch({ payload: response, type: SUCCESS });
     } catch (error) {

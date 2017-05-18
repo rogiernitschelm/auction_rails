@@ -1,7 +1,7 @@
 class AuthorizationsController < ApplicationController
   include UserParams
 
-  skip_authorization_check only: :login
+  skip_authorization_check only: %i(login get_current_user)
 
   def login
     user = User.find_by(email: login_params[:email].to_s.downcase)
@@ -13,6 +13,10 @@ class AuthorizationsController < ApplicationController
     else
       render json: { error: :invalid_username_or_password }, status: 403
     end
+  end
+
+  def get_current_user
+    render json: current_user
   end
 
   private

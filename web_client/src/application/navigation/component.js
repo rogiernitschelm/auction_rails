@@ -25,7 +25,7 @@ export default class Navigation extends Component {
   renderAccountButton() {
     if (this.props.authenticated) {
       return (
-        <NavItem className="is-tab" to={`${this.props.usertype}/account`}>
+        <NavItem className="is-tab" to='/account'>
           Account
         </NavItem>
       );

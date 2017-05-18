@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   end
 
   post 'authorizations/login'
+  get 'authorizations/get_current_user'
 end

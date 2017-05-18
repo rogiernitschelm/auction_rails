@@ -5,6 +5,11 @@ import {
 
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILURE,
+
+  GET_CURRENT_USER,
+  GET_CURRENT_USER_SUCCESS,
+  GET_CURRENT_USER_FAILURE,
+
   LOGOUT,
   UNMOUNT
 } from './';
@@ -13,11 +18,28 @@ const INITIAL_STATE = {
   authenticated: localStorage.getItem('auth_token') ? true : false,
   loading: false,
   usertype: {},
-  error: ''
+  error: '',
+  user: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case GET_CURRENT_USER: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case GET_CURRENT_USER_SUCCESS: {
+      console.log(action.payload.date)
+      return {
+        ...state,
+        loading: false,
+        user: action.payload.data
+      };
+    }
+
     case AUTHENTICATE: {
       return {
         ...state,
