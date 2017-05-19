@@ -35,7 +35,7 @@ class User < ApplicationRecord
   end
 
   def usertype
-    'buyer' if buyer?
+    return 'buyer' if buyer?
     'seller' if seller?
   end
 

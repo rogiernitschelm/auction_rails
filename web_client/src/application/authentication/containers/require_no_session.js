@@ -2,24 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { mapStateToProps } from '../';
+import { getCurrentUser } from 'authentication';
 
-@connect(mapStateToProps)
+@connect(mapStateToProps, { getCurrentUser })
 export default ComposedComponent => {
   class RequireNoSession extends Component {
     state = { redirect: false };
 
     componentWillMount() {
-      if (this.props.authenticated) {
+      this.props.getCurrentUser();
+
+      if (this.props.user) {
         this.setState({ redirect: true });
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (this.props.authenticated) {
+      if (this.props.user) {
         this.setState({ redirect: true });
       }
 
-      if (nextProps.authenticated) {
+      if (nextProps.user) {
         this.setState({ redirect: true });
       }
     }

@@ -15,11 +15,9 @@ import {
 } from './';
 
 const INITIAL_STATE = {
-  authenticated: localStorage.getItem('auth_token') ? true : false,
   loading: false,
-  usertype: {},
   error: '',
-  user: {}
+  user: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,11 +30,18 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case GET_CURRENT_USER_SUCCESS: {
-      console.log(action.payload.date)
       return {
         ...state,
         loading: false,
         user: action.payload.data
+      };
+    }
+
+    case GET_CURRENT_USER_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: action.error.message
       };
     }
 
@@ -48,10 +53,11 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case AUTHENTICATE_SUCCESS: {
+      const { user, usertype } = action.payload.data;
+
       return {
         ...state,
-        authenticated: true,
-        usertype: action.payload.data.usertype,
+        user: { ...user, usertype },
         loading: false,
         error: null
       };
@@ -69,8 +75,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: null,
-        loading: false,
-        authenticated: true
+        loading: false
       };
     }
 
@@ -85,7 +90,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGOUT: {
       return {
         ...state,
-        authenticated: false
+        user: null
       };
     }
 

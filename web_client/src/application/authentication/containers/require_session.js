@@ -12,13 +12,13 @@ export default ComposedComponent => {
     componentWillMount() {
       this.props.getCurrentUser();
 
-      if (!this.props.authenticated) {
+      if (!this.props.user) {
         this.setState({ redirect: true });
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated) {
+      if (!nextProps.user) {
         this.setState({ redirect: true });
       }
     }
@@ -28,7 +28,6 @@ export default ComposedComponent => {
     }
 
     render() {
-      console.warn(this.props)
       if (this.state.redirect) {
         return <Redirect to="/" />;
       }

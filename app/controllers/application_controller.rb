@@ -27,7 +27,7 @@ class ApplicationController < ActionController::API
   # authorization headers could be present, but should not raise when they are.
 
   def authorization_header?
-    return true if request.headers['Authorization']
+    return true if request.headers['Authorization'] && request.headers['Authorization'] != 'null'
 
     false
   end

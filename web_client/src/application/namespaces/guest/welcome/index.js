@@ -6,7 +6,7 @@ import LoginComponent from '../shared/login_form';
 
 const Welcome = props => {
   const renderLogin = () => {
-    if (!props.authenticated) {
+    if (!props.user) {
       return <LoginComponent />;
     }
   };
@@ -16,7 +16,7 @@ const Welcome = props => {
       <Hero
         title="Reclameveiling"
         subtitle="Adverteren tot je erbij neervalt."
-        className={`is-${props.authenticated ? 'large' : 'medium'} is-bold is-primary`}
+        className={`is-${props.user ? 'large' : 'medium'} is-bold is-primary`}
       >
 
         {renderLogin()}
