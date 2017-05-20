@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from 'config';
 import snakeCaseKeys from 'snakecase-keys';
+import camelCaseKeys from 'camelcase-keys';
 
 export default ({ dispatch }) => {
   return next => async action => {
@@ -10,7 +11,7 @@ export default ({ dispatch }) => {
       return next(action);
     }
 
-    const token = localStorage.getItem('auth_token') || null;
+    const token = localStorage.getItem('authToken') || null;
     const [, SUCCESS, FAILURE] = types;
     const { path, method = 'get', params = {}, root = 'api' } = promise;
     let response;
@@ -23,7 +24,7 @@ export default ({ dispatch }) => {
         headers: { authorization: token }
       });
 
-      return dispatch({ payload: response, type: SUCCESS });
+      return dispatch({ payload: camelCaseKeys(response, { deep: true }), type: SUCCESS });
     } catch (error) {
       return dispatch({ type: FAILURE, error });
     }

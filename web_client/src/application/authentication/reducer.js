@@ -30,10 +30,12 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case GET_CURRENT_USER_SUCCESS: {
+      const { user, usertype } = action.payload.data;
+
       return {
         ...state,
         loading: false,
-        user: action.payload.data
+        user: { ...user, usertype },
       };
     }
 

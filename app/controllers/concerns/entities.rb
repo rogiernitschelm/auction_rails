@@ -11,5 +11,9 @@ module Entities
     def render_entity(entity, object, options = {})
       render json: entity.represent(object, options)
     end
+
+    def show_entity(entity, object, options = {})
+      entity.represent(object, options)
+    end
   end
 end

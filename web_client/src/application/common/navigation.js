@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 export const Nav = ({ children, className = '' }) => {
   return (
     <nav className={`nav ${className}`}>
-       <div className="container">
       {children}
-      </div>
     </nav>
   );
 };
@@ -40,5 +38,25 @@ export const NavRight = ({ children, className = '' }) => {
     <div className={`nav-right ${className}`}>
       {children}
     </div>
+  );
+};
+
+export const Tabs = ({ children, className }) => {
+  return (
+    <div className="container">
+      <div className={`tabs is-toggle ${className}`}>
+        <ul>
+          {children}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export const Tab = ({ isActive = '', children, to }) => {
+  return (
+    <li className={isActive ? 'is-active' : ''}>
+      <Link to={to}>{children}</Link>
+    </li>
   );
 };

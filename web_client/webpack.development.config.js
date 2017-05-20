@@ -61,7 +61,7 @@ module.exports = {
   externals: {
     config: JSON.stringify(
       {
-        authorizations: 'http://localhost:5100/authorizations',
+        sessions: 'http://localhost:5100/sessions',
         api: 'http://localhost:5100/api',
         admin: 'http://localhost:5100/admin'
       }

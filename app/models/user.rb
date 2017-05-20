@@ -18,6 +18,16 @@ class User < ApplicationRecord
 
   scope :usertype, ->(usertype) { joins(usertype) }
 
+  def as_json(options = {})
+    options[:except] ||= %i(password_digest password)
+
+    super(options)
+  end
+
+  def to_xml
+    raise 'Please sanitize password first.'
+  end
+
   def admin?
     admin
   end

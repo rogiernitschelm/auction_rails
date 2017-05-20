@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :companies, only: %i(create)
     resources :sellers, only: %i(show create update destroy)
     resources :auctions, only: %i(index show create update destroy)
+    resources :users, only: :update
   end
 
   namespace :admin do
@@ -17,6 +18,6 @@ Rails.application.routes.draw do
     resources :auctions, only: %i(index show update destroy)
   end
 
-  post 'authorizations/login'
-  get 'authorizations/get_current_user'
+  post 'sessions/login'
+  get 'sessions/get_current_user'
 end

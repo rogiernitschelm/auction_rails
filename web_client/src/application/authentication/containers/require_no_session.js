@@ -10,10 +10,12 @@ export default ComposedComponent => {
     state = { redirect: false };
 
     componentWillMount() {
-      this.props.getCurrentUser();
-
       if (this.props.user) {
         this.setState({ redirect: true });
+      }
+
+      if (localStorage.getItem('authToken')) {
+        this.props.getCurrentUser();
       }
     }
 

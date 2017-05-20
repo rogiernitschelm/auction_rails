@@ -19,14 +19,14 @@ export const login = ({ email, password }) => {
     promise: {
       method: 'post',
       path: 'login',
-      root: 'authorizations',
+      root: 'sessions',
       params: { email, password }
     }
   };
 };
 
 export const logout = () => {
-  localStorage.removeItem('auth_token');
+  localStorage.removeItem('authToken');
 
   return {
     type: LOGOUT
@@ -53,7 +53,7 @@ export const getCurrentUser = () => {
     promise: {
       method: 'get',
       path: 'get_current_user',
-      root: 'authorizations'
+      root: 'sessions'
     }
   };
 };
