@@ -1,4 +1,6 @@
-export default state => ({
-  authenticated: state.authentication.authenticated,
-  usertype: state.authentication.usertype
-});
+export default state => {
+  return {
+    authenticated: state.authentication.authenticated,
+    usertype: state.authentication.usertype
+  };
+};

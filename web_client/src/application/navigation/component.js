@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Nav, NavLeft, NavRight, NavItem } from 'common';
-import { connect } from 'react-redux';
-import { logout } from 'authentication';
-import { mapStateToProps } from './';
+import NavigationContainer from './container';
+import SellerLinks from './children/seller_links';
+import BuyerLinks from './children/buyer_links';
 
-@connect(mapStateToProps, { logout })
-export default class Navigation extends Component {
-  renderSessionButton() {
-    if (this.props.authenticated) {
+const NavigationComponent = props => {
+  const renderSessionButton = () => {
+    if (props.authenticated) {
       return (
-        <NavItem className="is-tab" onClick={() => this.props.logout()}>
+        <NavItem className="is-tab" onClick={() => props.logout()}>
           Uitloggen
         </NavItem>
       );
@@ -20,10 +19,10 @@ export default class Navigation extends Component {
         Inloggen
       </NavItem>
     );
-  }
+  };
 
-  renderAccountButton() {
-    if (this.props.authenticated) {
+  const renderAccountButton = () => {
+    if (props.authenticated) {
       return (
         <NavItem className="is-tab" to='/account'>
           Account
@@ -36,21 +35,34 @@ export default class Navigation extends Component {
         Registratie
       </NavItem>
     );
-  }
+  };
 
-  render() {
-    return (
-      <Nav className="has-shadow">
-        <NavLeft>
-          <NavItem className="is-tab">
-            Reclameveiling
-          </NavItem>
-        </NavLeft>
-        <NavRight>
-          {this.renderAccountButton()}
-          {this.renderSessionButton()}
-        </NavRight>
-      </Nav>
-    );
-  }
-}
+  const renderUsertypeSepecificLinks = () => {
+    if (props.usertype === 'seller') {
+      return <SellerLinks />;
+    }
+
+    if (props.usertype === 'buyer') {
+      return <BuyerLinks />;
+    }
+
+    return <div />;
+  };
+
+  return (
+    <Nav className="has-shadow">
+      <NavLeft>
+        <NavItem className="is-tab">
+          Reclameveiling
+        </NavItem>
+      </NavLeft>
+      {renderUsertypeSepecificLinks()}
+      <NavRight>
+        {renderAccountButton()}
+        {renderSessionButton()}
+      </NavRight>
+    </Nav>
+  );
+};
+
+export default NavigationContainer(NavigationComponent);

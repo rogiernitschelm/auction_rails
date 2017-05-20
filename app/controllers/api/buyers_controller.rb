@@ -17,7 +17,7 @@ class Api::BuyersController < ApplicationController
 
     auth_token = JsonWebToken.encode(user_id: @buyer.user.id)
 
-    render json: { auth_token: auth_token, user: @buyer.user }
+    render json: { auth_token: auth_token, user: show_entity(UserEntity, @buyer.user) }
   end
 
   def show

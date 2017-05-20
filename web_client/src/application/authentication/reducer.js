@@ -84,12 +84,12 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case REGISTRATION_SUCCESS: {
-      const { user, usertype } = action.payload.data;
+      const { user } = action.payload.data;
 
       return {
         ...state,
         user,
-        usertype,
+        usertype: user.seller ? 'seller' : 'buyer',
         error: null,
         authenticated: true,
         loading: false
@@ -109,6 +109,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: null,
         authenticated: false,
+        usertype: ''
       };
     }
 
