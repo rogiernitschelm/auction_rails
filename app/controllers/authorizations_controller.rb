@@ -6,7 +6,7 @@ class AuthorizationsController < ApplicationController
   def login
     user = User.find_by(email: login_params[:email].to_s.downcase)
 
-    if user && user.authenticate(login_params)
+    if user && user.authenticate(login_params[:password])
       auth_token = JsonWebToken.encode(user_id: user.id)
 
       render json: { auth_token: auth_token, user: user, usertype: user.usertype }, status: 200
