@@ -41,7 +41,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        authenticatd: true,
+        authenticated: true,
         user,
         usertype
       };

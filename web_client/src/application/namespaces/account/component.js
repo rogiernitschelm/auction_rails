@@ -5,8 +5,9 @@ import AccountContainer from './container';
 @AccountContainer
 export default class AccountComponent extends Component {
   render() {
-    const { handleSubmit, onSubmit } = this.props;
+    const { handleSubmit, onSubmit, updateAccountError } = this.props;
 
+    console.log(updateAccountError)
     return (
       <div>
         <Hero className="is-primary is-small is-bold" title="Jouw account" />
@@ -14,7 +15,7 @@ export default class AccountComponent extends Component {
           <Form
             title="Wijzig jouw account"
             onSubmit={handleSubmit(onSubmit)}
-            error="bla"
+            error={updateAccountError}
           >
             <Input
               autoFocus
