@@ -12,11 +12,14 @@ export default ({ dispatch }) => {
     }
 
     const token = localStorage.getItem('authToken') || null;
-    const [, SUCCESS, FAILURE] = types;
+    const [REQUEST, SUCCESS, FAILURE] = types;
+
     const { path, method = 'get', params = {}, root = 'api' } = promise;
     let response;
 
     try {
+      dispatch({ type: REQUEST });
+      
       response = await axios.request({
         url: `${config[root]}/${path}`,
         method,
