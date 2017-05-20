@@ -91,6 +91,7 @@ export default (state = INITIAL_STATE, action) => {
         user,
         usertype,
         error: null,
+        authenticated: true,
         loading: false
       };
     }

@@ -8,7 +8,7 @@ class Api::SellersController < ApplicationController
     return render json: nil, status: 403 if authorization_header?
 
     Seller.transaction do
-      user = User.new(user_params)
+      user = User.create!(user_params)
 
       @seller = Seller.new
       @seller.user = user
