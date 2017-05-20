@@ -14,10 +14,16 @@ import {
   UNMOUNT
 } from './';
 
+import {
+  UPDATE_ACCOUNT_SUCCESS
+} from '../namespaces/account/actions';
+
 const INITIAL_STATE = {
   loading: false,
   error: '',
-  user: null
+  user: null,
+  usertype: '',
+  authenticated: !!localStorage.getItem('authToken')
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -35,7 +41,9 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
-        user: { ...user, usertype },
+        authenticatd: true,
+        user,
+        usertype
       };
     }
 
@@ -59,7 +67,9 @@ export default (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        user: { ...user, usertype },
+        user,
+        usertype,
+        authenticated: true,
         loading: false,
         error: null
       };
@@ -74,9 +84,12 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case REGISTRATION_SUCCESS: {
+      const { user, usertype } = action.payload.data;
+
       return {
         ...state,
-        user: action.payload.data.user,
+        user,
+        usertype,
         error: null,
         loading: false
       };
@@ -93,7 +106,8 @@ export default (state = INITIAL_STATE, action) => {
     case LOGOUT: {
       return {
         ...state,
-        user: null
+        user: null,
+        authenticated: false,
       };
     }
 
@@ -101,6 +115,13 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: ''
+      };
+    }
+
+    case UPDATE_ACCOUNT_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload.data
       };
     }
 

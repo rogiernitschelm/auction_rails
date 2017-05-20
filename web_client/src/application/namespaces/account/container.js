@@ -21,7 +21,6 @@ export default ComposedComponent => {
     onSubmit = ::this.onSubmit;
 
     onSubmit(formInformation) {
-      console.warn(this.props)
       const userInformation = { ...formInformation, id: this.props.user.id };
       this.props.updateAccount(userInformation);
     }
