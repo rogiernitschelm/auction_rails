@@ -36,6 +36,10 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case GET_CURRENT_USER_SUCCESS: {
+      if (!action.payload.data) {
+        return { ...state };
+      }
+
       const { user, usertype } = action.payload.data;
 
       return {
