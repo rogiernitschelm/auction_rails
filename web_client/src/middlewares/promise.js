@@ -1,6 +1,5 @@
 import axios from 'axios';
 import config from 'config';
-import { AUTHENTICATE, REGISTRATION } from 'authentication';
 import snakeCaseKeys from 'snakecase-keys';
 
 export default ({ dispatch }) => {
@@ -20,7 +19,7 @@ export default ({ dispatch }) => {
       response = await axios.request({
         url: `${config[root]}/${path}`,
         method,
-        data: params,
+        data: snakeCaseKeys(params),
         headers: { authorization: token }
       });
 

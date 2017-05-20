@@ -74,6 +74,7 @@ export default (state = INITIAL_STATE, action) => {
     case REGISTRATION_SUCCESS: {
       return {
         ...state,
+        user: action.payload.data.user,
         error: null,
         loading: false
       };
