@@ -44,7 +44,7 @@ export const NavRight = ({ children, className = '' }) => {
 export const Tabs = ({ children, className }) => {
   return (
     <div className="container">
-      <div className={`tabs is-toggle ${className}`}>
+      <div className={`tabs ${className}`}>
         <ul>
           {children}
         </ul>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Hero, Section, Form, Input } from 'common';
+import { Hero, Section, Form, Input, Tabs, Tab } from 'common';
 import AccountContainer from './container';
 
 @AccountContainer
@@ -7,10 +7,16 @@ export default class AccountComponent extends Component {
   render() {
     const { handleSubmit, onSubmit, updateAccountError } = this.props;
 
-    console.log(updateAccountError)
     return (
       <div>
         <Hero className="is-primary is-small is-bold" title="Jouw account" />
+
+        <Tabs className="is-centered is-small">
+          <Tab to="/">Gebruikersgegevens</Tab>
+          <Tab to="/">Zakelijke gegevens</Tab>
+          <Tab to="/">Account verwijderen</Tab>
+        </Tabs>
+
         <Section>
           <Form
             title="Wijzig jouw account"
